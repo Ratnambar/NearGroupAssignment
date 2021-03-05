@@ -33,11 +33,8 @@ class TodoList(Resource):
         _txn_info = _json['txn_info']
         _action = _json['action']
         _time = _json['time']
-
         if _user_id and _amount and _coins_balance and _txn_type and _txn_info and _action and _time and request.method == 'POST':
-
             id = mongo.db.crudApp.insert({'user_id':_user_id,'amount':_amount,'coins_balance':_coins_balance,'txn_type':_txn_type,'txn_info':_txn_info,'action':_action,'time':_time })
-
             resp = jsonify("Data added successfully.")
             resp.status_code = 200
             return resp
@@ -64,7 +61,6 @@ class TodoAgain(Resource):
         _txn_info = _json['txn_info']
         _action = _json['action']
         _time = _json['time']
-
         if _id and request.method == 'PUT':
             mongo.db.crudApp.update_one({'_id':ObjectId(_id['$oid']) if '$oid' in _id else ObjectId(_id)}, {'$set':{'user_id':_user_id,'amount':_amount,'coins_balance':_coins_balance,'txn_type':_txn_type,'txn_info':_txn_type,'action':_action,'time':_time}})
             resp = jsonify("Data updated successfully.")
